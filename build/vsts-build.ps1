@@ -126,6 +126,7 @@ else
 {
 	# Publish to Gallery
 	Write-PSFMessage -Level Important -Message "Publishing the d365bap.tools module to $($Repository)"
+	Write-PSFMessage -Level Important -Message $ApiKey
 	Publish-Module -Path "$($publishDir.FullName)\d365bap.tools" -NuGetApiKey $ApiKey -Force -Repository $Repository
 }
 #endregion Publish
