@@ -80,7 +80,7 @@
         It will whitelist the public IP address of the machine running the command.
         It will assign the "Reader" role.
         It will use the default reason.
-        It will output all details directly to an Excel file.
+        It will output all details directly to an Excel file. ??
     .NOTES
         Author: Mötz Jensen (@Splaxi)
 #>

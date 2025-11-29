@@ -48,7 +48,7 @@ function Get-PpacD365PlatformUpdate {
     )
     
     begin {
-        # Make sure all *BapEnvironment* cmdlets will validate that the environment exists prior running anything.
+        # Make sure all *BapEnvironment* cmdlets will validate that the environment exists prior to running anything.
         $envObj = Get-BapEnvironment -EnvironmentId $EnvironmentId | Select-Object -First 1
 
         if ($null -eq $envObj) {

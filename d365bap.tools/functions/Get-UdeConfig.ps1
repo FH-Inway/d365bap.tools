@@ -4,7 +4,7 @@
         Gets UDE configuration information.
         
     .DESCRIPTION
-        Retrieves configuration settings for the User Development Environment (UDE).
+        Retrieves configuration settings for the Unified Development Environment (UDE).
         
         Is based on the details that the developer can see from within Visual Studio when working with UDE.
         

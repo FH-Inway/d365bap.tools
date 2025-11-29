@@ -4,7 +4,7 @@
         Retrieves the UDE connection information.
         
     .DESCRIPTION
-        This function retrieves the connection information that is currently used by Visual Studio for the User Development Environment (UDE).
+        This function retrieves the connection information that is currently used by Visual Studio for the Unified Development Environment (UDE).
         
     .PARAMETER Path
         The path to the UDE configuration file.
