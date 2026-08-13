@@ -189,6 +189,9 @@ function New-UnifiedEnvironment {
 
         $secureTokenPowerApi = (Get-AzAccessToken -ResourceUrl "https://api.powerplatform.com/" -AsSecureString).Token
         $tokenPowerApiValue = ConvertFrom-SecureString -AsPlainText -SecureString $secureTokenPowerApi
+        $headersPowerApi = @{
+            "Authorization" = "Bearer $($tokenPowerApiValue)"
+        }
     
         if ($SecurityGroup) {
             $SecurityGroupId = Get-GraphGroup `
@@ -203,12 +206,12 @@ function New-UnifiedEnvironment {
         if (Test-PSFFunctionInterrupt) { return }
 
         $shellEnvironmentParams = @{
-            Name                     = $Name
-            HeadersBapApi            = $headersBapApi
-            Location                 = $Location
-            Region                   = $Region
-            CustomDomainName         = $CustomDomainName
-            SecurityGroupId          = $SecurityGroupId
+            Name                      = $Name
+            HeadersPowerApi           = $headersPowerApi
+            Location                  = $Location
+            Region                    = $Region
+            CustomDomainName          = $CustomDomainName
+            SecurityGroupId           = $SecurityGroupId
             PostProvisionDelaySeconds = $PostProvisionDelaySeconds
             ReadyStateTimeoutMinutes  = $ReadyStateTimeoutMinutes
             EarlyRelease              = $EarlyRelease.IsPresent
@@ -264,7 +267,7 @@ function New-ShellEnvironment {
         [string] $Name,
 
         [Parameter(Mandatory = $true)]
-        [hashtable] $HeadersBapApi,
+        [hashtable] $HeadersPowerApi,
 
         [Parameter(Mandatory = $true)]
         [string] $Location,
@@ -284,51 +287,41 @@ function New-ShellEnvironment {
         [switch] $EarlyRelease
     )
 
-    $localUri = 'https://api.bap.microsoft.com/providers/Microsoft.BusinessAppPlatform/environments?api-version=2024-05-01'
+    $localUri = 'https://api.powerplatform.com/environmentmanagement/provisioning/environments?api-version=2024-10-01'
 
     $config = [PsCustomObject][ordered]@{
-        location   = $Location
-        properties = [PsCustomObject][ordered]@{
-            databaseType              = "CommonDataService"
-            description               = ""
-            displayName               = $Name
-            environmentSku            = "Sandbox" # UDE & USE - Can only be Sandbox
-            linkedEnvironmentMetadata = [PsCustomObject][ordered]@{
-                baseLanguage = "" # Maybe it selects the TenantDefault
-                currency     = $null # Maybe it selects the TenantDefault
-                templates    = @("D365_DeveloperEdition")
-            }
+        displayName               = $Name
+        location                  = $Location
+        environmentSku            = "Sandbox" # UDE & USE - Can only be Sandbox
+        databaseType              = "CommonDataService"
+        description               = ""
+        linkedEnvironmentMetadata = [PsCustomObject][ordered]@{
+            templates = @("D365_DeveloperEdition")
         }
     }
 
     if ($Region) {
-        $config.properties | `
-            Add-Member -MemberType NoteProperty `
-            -Name azureRegion `
-            -Value $Region
+        $config | Add-Member -MemberType NoteProperty -Name macroRegion -Value $Region
     }
 
     if ($CustomDomainName) {
-        $config.properties.linkedEnvironmentMetadata | `
+        $config.linkedEnvironmentMetadata | `
             Add-Member -MemberType NoteProperty `
             -Name domainName `
             -Value $CustomDomainName
     }
 
     if ($null -ne $SecurityGroupId) {
-        $config.properties.linkedEnvironmentMetadata | `
+        $config.linkedEnvironmentMetadata | `
             Add-Member -MemberType NoteProperty `
             -Name securityGroupId `
             -Value $SecurityGroupId
     }
 
     if ($EarlyRelease.IsPresent) {
-        $config.properties | `
-            Add-Member -MemberType NoteProperty `
-                -Name cluster `
-                -Value ([PsCustomObject][ordered]@{
-                    category = "FirstRelease"
-                })
+        $config | Add-Member -MemberType NoteProperty -Name cluster -Value ([PsCustomObject][ordered]@{
+            category = "FirstRelease"
+        })
     }
 
     $payload = $config | ConvertTo-Json -Depth 10
@@ -350,7 +343,7 @@ function New-ShellEnvironment {
         $createEnvironmentParams = @{
             Method            = 'Post'
             Uri               = $localUri
-            Headers           = $HeadersBapApi
+            Headers           = $HeadersPowerApi
             Body              = $payload
             ContentType       = 'application/json'
             SkipHttpErrorCheck = $true
