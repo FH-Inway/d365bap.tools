@@ -169,6 +169,7 @@
 		, 'Get-PpacD365PlatformUpdate'
 		, 'Get-PpacDeployLocation'
 		, 'Get-PpacRbacRole'
+		, 'Get-PpacRbacRoleAssignment'
 		, 'Get-PpacRbacRoleMember'
 
 		, 'Get-PpacSecurityRole'
