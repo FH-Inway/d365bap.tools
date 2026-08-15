@@ -52,9 +52,11 @@ function Get-PpacRbacRoleMember {
         $token = Get-PSFConfigValue -FullName "d365bap.tools.internal.ppac.rbac.token"
 
         if ($null -eq $token) {
-            Write-PSFMessage -Level Warning -Message "No authentication token found for PPAC RBAC operations. Please run <c='em'>Set-PpacRbacContext</c> to authenticate first."
-            Stop-PSFFunction -Message "Stopping because of missing authentication token." -Exception $([System.Exception]::new("Missing authentication token for PPAC RBAC operations."))
-            return
+            Write-PSFMessage -Level Warning -Message "No PPAC RBAC authentication token found. Falling back to the Azure access token for <c='em'>https://api.powerplatform.com/</c>."
+            Write-PSFMessage -Level Important -Message "If you want to use the PPAC RBAC cmdlets with application id impersonation, please run <c='em'>Set-PpacRbacContext</c> first to authenticate and obtain a token."
+            $secureTokenPowerApi = (Get-AzAccessToken -ResourceUrl "https://api.powerplatform.com/" -AsSecureString).Token
+            $tokenPowerApiValue = ConvertFrom-SecureString -AsPlainText -SecureString $secureTokenPowerApi
+            $token = "Bearer $tokenPowerApiValue"
         }
 
         $headersPowerApi = @{ 'Content-Type' = 'application/json' }
