@@ -3,6 +3,7 @@
     "roleDefinitionId": "95e94555-018c-447b-8691-bdac8e12211e",
     "roleDefinitionName": "Power Platform Role Based Access Control Administrator",
     "description": "Grants read access to all resources and the ability to manage role assignments for Power Platform resources.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -18,6 +19,7 @@
     "roleDefinitionId": "c886ad2e-27f7-4874-8381-5849b8d8a090",
     "roleDefinitionName": "Power Platform Reader",
     "description": "Grants read-only access to view all Power Platform resources including role definitions and role assignments.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -31,6 +33,7 @@
     "roleDefinitionId": "ff954d61-a89a-4fbe-ace9-01c367b89f87",
     "roleDefinitionName": "Power Platform Contributor",
     "description": "Grants full access to manage all Power Platform resources, but does not allow you to assign or remove role assignments.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -47,6 +50,7 @@
     "roleDefinitionId": "0cb07c69-1631-4725-ab35-e59e001c51ea",
     "roleDefinitionName": "Power Platform Owner",
     "description": "Grants full access to manage all Power Platform resources, including the ability to assign and manage role assignments.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -57,9 +61,133 @@
     "permissionsExceptions": []
   },
   {
+    "roleDefinitionId": "19ece389-bffe-4504-9da5-5312d3ae3a4f",
+    "roleDefinitionName": "Repository Owner",
+    "description": "Grants owner access to assets within a repository.",
+    "roleType": "ResourceRole",
+    "assignableScopes": [
+      "/tenants/{0}/environments/{1}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "Repositories.*"
+    ],
+    "permissionsExceptions": []
+  },
+  {
+    "roleDefinitionId": "72c13b89-b785-4199-9abc-d0dc6731c835",
+    "roleDefinitionName": "Repository Contributor",
+    "description": "Grants contributor access to assets within a repository.",
+    "roleType": "ResourceRole",
+    "assignableScopes": [
+      "/tenants/{0}/environments/{1}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "Repositories.Repositories.Write",
+      "Repositories.Repositories.Read",
+      "Repositories.MicrosoftApps.*"
+    ],
+    "permissionsExceptions": []
+  },
+  {
+    "roleDefinitionId": "7dc13c34-2a0c-4d6b-b5e3-4d1568b9b796",
+    "roleDefinitionName": "Repository Reader",
+    "description": "Grants read access to assets within a repository.",
+    "roleType": "ResourceRole",
+    "assignableScopes": [
+      "/tenants/{0}/environments/{1}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "Repositories.MicrosoftApps.Read",
+      "Repositories.MicrosoftApps.Preview.Read",
+      "Repositories.MicrosoftApps.Play.Read",
+      "Repositories.Repositories.Read",
+      "Repositories.Repositories.Share.Read"
+    ],
+    "permissionsExceptions": []
+  },
+  {
+    "roleDefinitionId": "e6261087-dd25-41e1-94bd-29c8cba37fa6",
+    "roleDefinitionName": "Microsoft App Owner",
+    "description": "Grants full access to manage the Microsoft App including viewing, editing, deleting, and managing role assignments.",
+    "roleType": "ResourceRole",
+    "assignableScopes": [
+      "/tenants/{0}/environments/{1}/repositories/{2}/microsoftapps/{3}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "Repositories.MicrosoftApps.*"
+    ],
+    "permissionsExceptions": []
+  },
+  {
+    "roleDefinitionId": "e691d036-797c-43d9-bbb9-d4381ea73055",
+    "roleDefinitionName": "Microsoft App Contributor",
+    "description": "Grants contributor access to the Microsoft App.",
+    "roleType": "ResourceRole",
+    "assignableScopes": [
+      "/tenants/{0}/environments/{1}/repositories/{2}/microsoftapps/{3}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "Repositories.MicrosoftApps.*"
+    ],
+    "permissionsExceptions": [
+      "Repositories.MicrosoftApps.Delete"
+    ]
+  },
+  {
+    "roleDefinitionId": "7136e353-76ab-45ff-9322-0df435086b83",
+    "roleDefinitionName": "Microsoft App Reader",
+    "description": "Grants read-only access to view the Microsoft App.",
+    "roleType": "ResourceRole",
+    "assignableScopes": [
+      "/tenants/{0}/environments/{1}/repositories/{2}/microsoftapps/{3}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "Repositories.MicrosoftApps.Read",
+      "Repositories.MicrosoftApps.Preview.Read",
+      "Repositories.MicrosoftApps.Play.Read",
+      "Repositories.MicrosoftApps.Share.Read"
+    ],
+    "permissionsExceptions": []
+  },
+  {
+    "roleDefinitionId": "6fe8f338-9e96-4ea9-aa04-fc40fab73db6",
+    "roleDefinitionName": "Monitoring Hub Reader",
+    "description": "Grants read-only access to all Monitoring Hub capabilities including alerts, metrics, time series, and recommendations.",
+    "roleType": "ManagementRole",
+    "assignableScopes": [
+      "/tenants/{0}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "MonitoringHub.*.Read"
+    ],
+    "permissionsExceptions": []
+  },
+  {
+    "roleDefinitionId": "511de633-bc9a-4454-9a5d-40d190a2ba1b",
+    "roleDefinitionName": "Monitoring Hub Administrator",
+    "description": "Grants full access to all Monitoring Hub capabilities including alerts, metrics, time series, and recommendations.",
+    "roleType": "ManagementRole",
+    "assignableScopes": [
+      "/tenants/{0}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "MonitoringHub.*"
+    ],
+    "permissionsExceptions": []
+  },
+  {
     "roleDefinitionId": "5835ab2b-77cf-48c6-9a37-4de77b1354ee",
     "roleDefinitionName": "Copilot Studio Authors",
     "description": "Grants access to view, create, and modify copilots in Copilot Studio.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -74,6 +202,7 @@
     "roleDefinitionId": "6ec9a887-3309-4d9c-bec1-c24e37ae617e",
     "roleDefinitionName": "Vibe Project Owner",
     "description": "Grants full access to manage the Vibe project including viewing, editing, and deleting.",
+    "roleType": "ResourceRole",
     "assignableScopes": [
       "/tenants/{0}/environments/{1}/projects/{2}"
     ],
@@ -87,6 +216,7 @@
     "roleDefinitionId": "2d6b7db4-6751-456c-baa9-e708d8862c44",
     "roleDefinitionName": "Vibe Project Contributor",
     "description": "Grants access to view and edit the Vibe project, but does not allow deleting it.",
+    "roleType": "ResourceRole",
     "assignableScopes": [
       "/tenants/{0}/environments/{1}/projects/{2}"
     ],
@@ -101,6 +231,7 @@
     "roleDefinitionId": "73117049-034a-421d-ac67-df2314308369",
     "roleDefinitionName": "Vibe Project Viewer",
     "description": "Grants read-only access to view the Vibe project.",
+    "roleType": "ResourceRole",
     "assignableScopes": [
       "/tenants/{0}/environments/{1}/projects/{2}"
     ],
@@ -114,6 +245,7 @@
     "roleDefinitionId": "b4e9c1a2-6d3f-4a8b-9e7c-5f2d1b8a3c6e",
     "roleDefinitionName": "Subnet Diagnostics Operator",
     "description": "Grants access to view diagnostics information and execute diagnostic actions on subnet injection infrastructure.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -128,6 +260,7 @@
     "roleDefinitionId": "c5f0d2b3-8e4a-4c7d-a1b9-6e3f2d8c5a4b",
     "roleDefinitionName": "Subnet Diagnostics Reader",
     "description": "Grants read-only access to view subnet injection diagnostics information.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -141,6 +274,7 @@
     "roleDefinitionId": "d6a1e3c4-9f5b-4d8e-b2c7-7a4e3f1d9b8c",
     "roleDefinitionName": "Subnet Diagnostics Administrator",
     "description": "Grants full access to manage all subnet injection diagnostics including viewing, executing diagnostics, and performing remediation operations.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -154,6 +288,7 @@
     "roleDefinitionId": "e2f08f33-d8d1-4a25-9471-c6559e14f693",
     "roleDefinitionName": "PowerApp Owner",
     "description": "Grants full access to manage the Power App including viewing, editing, deleting, and managing role assignments.",
+    "roleType": "ResourceRole",
     "assignableScopes": [
       "/tenants/{0}/environments/{1}/powerapps/{2}"
     ],
@@ -167,6 +302,7 @@
     "roleDefinitionId": "53879a32-5380-45b3-982f-bad3be5bffa7",
     "roleDefinitionName": "PowerApp Editor",
     "description": "Grants access to view, edit, and share the Power App, but does not allow deleting it.",
+    "roleType": "ResourceRole",
     "assignableScopes": [
       "/tenants/{0}/environments/{1}/powerapps/{2}"
     ],
@@ -182,6 +318,7 @@
     "roleDefinitionId": "b9229f00-a4d2-4fdd-a9a1-f40e07c0bb03",
     "roleDefinitionName": "PowerApp Viewer",
     "description": "Grants read-only access to view the Power App and its role assignments.",
+    "roleType": "ResourceRole",
     "assignableScopes": [
       "/tenants/{0}/environments/{1}/powerapps/{2}"
     ],
@@ -193,9 +330,100 @@
     "permissionsExceptions": []
   },
   {
+    "roleDefinitionId": "7dd7c43f-39c0-4b96-8085-0b457211095f",
+    "roleDefinitionName": "Power Pages Reader",
+    "description": "Grants read-only access to view Power Pages metadata and configuration.",
+    "roleType": "ManagementRole",
+    "assignableScopes": [
+      "/tenants/{0}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "PowerPages.Websites.Read"
+    ],
+    "permissionsExceptions": []
+  },
+  {
+    "roleDefinitionId": "c8ea3441-7d32-4510-8333-1fd5b22a6008",
+    "roleDefinitionName": "Power Pages Contributor",
+    "description": "Grants access to view, create, and update Power Pages metadata and configuration, but does not allow deleting.",
+    "roleType": "ManagementRole",
+    "assignableScopes": [
+      "/tenants/{0}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "PowerPages.Websites.Read",
+      "PowerPages.Websites.Write"
+    ],
+    "permissionsExceptions": []
+  },
+  {
+    "roleDefinitionId": "3358e1e5-d854-488d-a172-55fea786765f",
+    "roleDefinitionName": "Power Pages Owner",
+    "description": "Grants full access to manage Power Pages metadata and configuration.",
+    "roleType": "ManagementRole",
+    "assignableScopes": [
+      "/tenants/{0}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "PowerPages.Websites.*"
+    ],
+    "permissionsExceptions": [
+      "PowerPages.Websites.Data.Read",
+      "PowerPages.Websites.Data.Write",
+      "PowerPages.Websites.Data.Delete"
+    ]
+  },
+  {
+    "roleDefinitionId": "ccfee3ee-afa8-42ed-8d42-47aee3079297",
+    "roleDefinitionName": "Power Pages Data Reader",
+    "description": "Grants read-only access to view Power Pages data and resources.",
+    "roleType": "ResourceRole",
+    "assignableScopes": [
+      "/tenants/{0}/environments/{1}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "PowerPages.Websites.Data.Read"
+    ],
+    "permissionsExceptions": []
+  },
+  {
+    "roleDefinitionId": "964b71b4-4bff-485e-ad3b-0c1d8b092bbb",
+    "roleDefinitionName": "Power Pages Data Contributor",
+    "description": "Grants access to view, create, and update Power Pages data and resources, but does not allow deleting.",
+    "roleType": "ResourceRole",
+    "assignableScopes": [
+      "/tenants/{0}/environments/{1}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "PowerPages.Websites.Data.Read",
+      "PowerPages.Websites.Data.Write"
+    ],
+    "permissionsExceptions": []
+  },
+  {
+    "roleDefinitionId": "b83af6c7-2d45-49d5-9edf-6266cde45ea4",
+    "roleDefinitionName": "Power Pages Data Owner",
+    "description": "Grants full access to manage Power Pages data and resources.",
+    "roleType": "ResourceRole",
+    "assignableScopes": [
+      "/tenants/{0}/environments/{1}"
+    ],
+    "restrictedScopes": [],
+    "permissions": [
+      "PowerPages.Websites.Data.*"
+    ],
+    "permissionsExceptions": []
+  },
+  {
     "roleDefinitionId": "38c9f647-07da-4e42-bfd7-4be26ee3110a",
     "roleDefinitionName": "Environment Management Administrator",
     "description": "Grants full access to manage all environment operations including provisioning, backup, restore, copy, and lifecycle management.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -209,6 +437,7 @@
     "roleDefinitionId": "d5b95a60-a291-4792-96d0-7b2fd086e7ad",
     "roleDefinitionName": "Environment Management Reader",
     "description": "Grants read-only access to view all environment management resources including environments, backups, and lifecycle operations.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -222,6 +451,7 @@
     "roleDefinitionId": "eda8bba2-3171-4ba0-9d62-bf4411cebd52",
     "roleDefinitionName": "Environment Backup Operator",
     "description": "Grants access to view, create, and delete environment backups.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -237,6 +467,7 @@
     "roleDefinitionId": "51a62123-6a4d-4565-8b5f-cd60172f3d62",
     "roleDefinitionName": "Environment Backup Reader",
     "description": "Grants read-only access to view environment backups.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -250,6 +481,7 @@
     "roleDefinitionId": "1284d1a1-2b8f-4b3d-a326-ad1068d1517c",
     "roleDefinitionName": "Environment Lifecycle Operations Reader",
     "description": "Grants read-only access to view details of environment lifecycle operations.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -263,12 +495,14 @@
     "roleDefinitionId": "7c1ad5c2-e100-4676-8e6a-60f2940dc3f2",
     "roleDefinitionName": "Environment Provisioning Operator",
     "description": "Grants access to provision new environments.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
     "restrictedScopes": [],
     "permissions": [
-      "EnvironmentManagement.Provisioning.Write"
+      "EnvironmentManagement.Provisioning.Write",
+      "EnvironmentManagement.Provisioning.Read"
     ],
     "permissionsExceptions": []
   },
@@ -276,6 +510,7 @@
     "roleDefinitionId": "f0f6e417-300b-4c0e-ba36-7ce83dafc4e2",
     "roleDefinitionName": "Environment State Operator",
     "description": "Grants access to enable or disable environments.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -289,6 +524,7 @@
     "roleDefinitionId": "89c3557d-bdbd-4914-adc5-2a4ec80f0812",
     "roleDefinitionName": "Environment Sku Operator",
     "description": "Grants access to change environment SKU types (e.g. Sandbox, Production, etc.).",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -302,6 +538,7 @@
     "roleDefinitionId": "232d0657-f718-44d6-9b57-4943df814703",
     "roleDefinitionName": "Environment Encryption Operator",
     "description": "Grants access to manage environment encryption, including applying customer-managed keys (CMK) or reverting to Microsoft-managed keys (MMK).",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -315,6 +552,7 @@
     "roleDefinitionId": "3413a04c-ae68-46fb-af1b-d6601d00ca28",
     "roleDefinitionName": "Environment Copy Operator",
     "description": "Grants access to view candidate environments and perform copy operations from one environment to another.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -329,6 +567,7 @@
     "roleDefinitionId": "f9d7e723-713f-4c83-9a3c-7e9abb3ccbcf",
     "roleDefinitionName": "Environment Recover Operator",
     "description": "Grants access to recover deleted environments.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -342,6 +581,7 @@
     "roleDefinitionId": "0aa09a73-3a2d-4079-93a4-2de5ec7f8912",
     "roleDefinitionName": "Environment Reset Operator",
     "description": "Grants access to reset environments.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -355,6 +595,7 @@
     "roleDefinitionId": "736b231a-28ad-4d15-955a-4c46299fdc40",
     "roleDefinitionName": "Environment Restore Operator",
     "description": "Grants access to view available backups and perform restore operations to environments.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -369,6 +610,7 @@
     "roleDefinitionId": "a67c6895-3e35-4a9c-9560-ed485dce9929",
     "roleDefinitionName": "Environment Failover Operator",
     "description": "Grants access to view disaster recovery properties and perform disaster recovery drills and failover operations on environments.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -383,6 +625,7 @@
     "roleDefinitionId": "8419cc69-3a16-442a-a707-1506d08fdfbd",
     "roleDefinitionName": "Environment ManageGovernance Operator",
     "description": "Grants access to enable or disable managed governance on environments.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -396,6 +639,7 @@
     "roleDefinitionId": "8de5dda7-87b4-4103-ac71-26898486d024",
     "roleDefinitionName": "Environment Group Admin",
     "description": "Grants full access to manage environment groups and rule-based governance policies.",
+    "roleType": "ManagementRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -416,6 +660,7 @@
     "roleDefinitionId": "363ee124-fdb2-406f-9272-ebf239730ed2",
     "roleDefinitionName": "Workflows Agent Data Subject Rights Admininstrator",
     "description": "Grants full access to perform read and delete operations for Data Subject Rights requests on Workflows Agent Flows",
+    "roleType": "ResourceRole",
     "assignableScopes": [
       "/tenants/{0}"
     ],
@@ -433,6 +678,7 @@
     "roleDefinitionId": "38a014c1-0485-4e5e-b784-782ea373b34b",
     "roleDefinitionName": "Workflows Agent Data Subject Rights Environment Reader",
     "description": "Grants full access to perform read operations for Data Subject Rights requests for Workflows Agent Flows for a given environment.",
+    "roleType": "ResourceRole",
     "assignableScopes": [
       "/tenants/{0}/environments/{1}"
     ],
