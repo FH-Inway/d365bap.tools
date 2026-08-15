@@ -11,6 +11,9 @@
     .PARAMETER ScopeIdentifier
         The name or id of the scope to return. Wildcards (*) are supported. For environment groups, specify the environment group id.
 
+    .PARAMETER PrincipalIdentifier
+        The object id of the assigned principal to return. Wildcards (*) are supported.
+
     .PARAMETER AsExcelOutput
         Instructs the command to output the results to an Excel file instead of the console.
 
@@ -18,6 +21,11 @@
         PS C:\> Get-PpacRbacRoleAssignment -Scope Environment -ScopeIdentifier "*Production*"
 
         Gets role assignments for environments with names containing "Production".
+
+    .EXAMPLE
+        PS C:\> Get-PpacRbacRoleAssignment -PrincipalIdentifier "00000000-*"
+
+        Gets role assignments for principals with object ids starting with "00000000-".
 
     .EXAMPLE
         PS C:\> Get-PpacRbacRoleAssignment -Scope EnvironmentGroup
@@ -42,6 +50,8 @@ function Get-PpacRbacRoleAssignment {
 
         [Alias('EnvironmentGroupId', 'EnvironmentGroupName', 'EnvironmentId', 'EnvironmentName')]
         [string] $ScopeIdentifier = "*",
+
+        [string] $PrincipalIdentifier = "*",
 
         [switch] $AsExcelOutput
     )
@@ -127,7 +137,9 @@ function Get-PpacRbacRoleAssignment {
                 -Headers $headersPowerApi 4> $null | `
                 Select-Object -ExpandProperty value
 
-            foreach ($assignment in $resColRaw) {
+            foreach ($assignment in ($resColRaw | Where-Object {
+                        $_.principalObjectId -like $PrincipalIdentifier
+                    })) {
                 $role = $rbacRoles | `
                     Where-Object { $_.roleDefinitionId -eq $assignment.roleDefinitionId } | `
                     Select-Object -First 1
