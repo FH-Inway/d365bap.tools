@@ -215,6 +215,7 @@
 		, 'New-UnifiedEnvironment'
 		
 		, 'Remove-BapTenantDetail'
+		, 'Remove-PpacRbacRoleAssignment'
 		
 		, 'Set-BapAzCopyPath'
 		
