@@ -5,7 +5,7 @@
     .DESCRIPTION
         Gets PPAC RBAC role assignments at tenant, environment group, and environment scopes.
 
-    .PARAMETER Scope
+    .PARAMETER ScopeType
         The scope type to return. Specify All, Tenant, EnvironmentGroup, or Environment.
 
     .PARAMETER ScopeIdentifier
@@ -38,7 +38,7 @@ function Get-PpacRbacRoleAssignment {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "")]
     param (
         [ValidateSet("All", "Tenant", "EnvironmentGroup", "Environment")]
-        [string] $Scope = "All",
+        [string] $ScopeType = "All",
 
         [Alias('EnvironmentGroupId', 'EnvironmentGroupName', 'EnvironmentId', 'EnvironmentName')]
         [string] $ScopeIdentifier = "*",
@@ -68,7 +68,7 @@ function Get-PpacRbacRoleAssignment {
 
         $scopeTargets = @()
 
-        if ($Scope -in "All", "Tenant") {
+        if ($ScopeType -in "All", "Tenant") {
             $scopeTargets += [PSCustomObject]@{
                 Type = "Tenant"
                 Id   = $tenantId
@@ -76,7 +76,7 @@ function Get-PpacRbacRoleAssignment {
             }
         }
 
-        if ($Scope -in "All", "EnvironmentGroup") {
+        if ($ScopeType -in "All", "EnvironmentGroup") {
             $environmentGroupId = [guid]::Empty
 
             if ([guid]::TryParse($ScopeIdentifier, [ref] $environmentGroupId)) {
@@ -92,7 +92,7 @@ function Get-PpacRbacRoleAssignment {
             Write-PSFMessage -Level Important -Message "Role assignments for multiple environment groups are not yet supported. Specify a single environment group id with <c='em'>-Scope EnvironmentGroup -ScopeIdentifier [id]</c>."
         }
 
-        if ($Scope -in "All", "Environment") {
+        if ($ScopeType -in "All", "Environment") {
             Get-BapEnvironment | Where-Object {
                 ($_.PpacEnvName -like $ScopeIdentifier) -or ($_.PpacEnvId -like $ScopeIdentifier)
             } | ForEach-Object {
