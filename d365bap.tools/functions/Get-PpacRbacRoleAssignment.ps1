@@ -132,7 +132,7 @@ function Get-PpacRbacRoleAssignment {
                     Where-Object { $_.roleDefinitionId -eq $assignment.roleDefinitionId } | `
                     Select-Object -First 1
 
-                $assignment | Select-PSFObject -TypeName "D365Bap.Tools.PpacRbacRoleAssignment" `
+                $roleAssignment = $assignment | Select-PSFObject -TypeName "D365Bap.Tools.PpacRbacRoleAssignment.Full" `
                     -ExcludeProperty "@odata.etag" `
                     -Property "roleAssignmentId as RoleAssignmentId", 
                     "scope as Scope",
@@ -147,6 +147,9 @@ function Get-PpacRbacRoleAssignment {
                     "createdByPrincipalObjectId as CreatedByPrincipalObjectId",
                     "createdOn as CreatedTime",
                     "expiresOn as ExpirationTime"
+
+                $roleAssignment.PSObject.TypeNames.Add("D365Bap.Tools.PpacRbacRoleAssignment")
+                $roleAssignment
             }
         }
 
