@@ -129,7 +129,7 @@ function Get-PpacRbacRoleAssignment {
 
             foreach ($assignment in $resColRaw) {
                 $role = $rbacRoles | `
-                    Where-Object { $_.RoleId -eq $assignment.roleDefinitionId } | `
+                    Where-Object { $_.roleDefinitionId -eq $assignment.roleDefinitionId } | `
                     Select-Object -First 1
 
                 $assignment | Select-PSFObject -TypeName "D365Bap.Tools.PpacRbacRoleAssignment" `
@@ -142,7 +142,7 @@ function Get-PpacRbacRoleAssignment {
                     "principalType as PrincipalType",
                     "principalObjectId as PrincipalObjectId",
                     "roleDefinitionId as RoleId",
-                    @{Name = "Role"; Expression = { $role.Role } },
+                    @{Name = "Role"; Expression = { $role.roleDefinitionName } },
                     "createdByPrincipalType as CreatedByPrincipalType",
                     "createdByPrincipalObjectId as CreatedByPrincipalObjectId",
                     "createdOn as CreatedTime",
